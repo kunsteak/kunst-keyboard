@@ -1,0 +1,238 @@
+# Choc keycaps are 17.5 x 16.5
+# cx = 18
+# cy = 17
+# bind: [up,right,down,left] + rotation
+# bind15u: [5,right,5,left]
+points:
+   key:
+      padding: cy
+      tags:
+        1u: true
+      footprints:
+          choc_hotswap:
+            type: choc
+            nets:
+              from: =column_net
+              to: GND
+            params:
+                keycaps: true
+                reverse: true
+                hotswap: true
+          choc:
+            type: choc
+            anchor:
+              rotate: 180
+            nets:
+              from: =column_net
+              to: GND
+            params:
+                keycaps: true
+                reverse: true
+   zones:
+    board:
+      rotate: 15
+      rows:
+        bottom:
+        home:
+        top:
+      columns:
+          pinkie:
+             spread: cx
+             row_overrides: 
+              home:
+                #bind: [34, 40, 0, 1]
+                # bind: [right,down,left,up]
+                bind: [0,5,25,5]
+                column_net: P10
+                tags:
+                  15u: true
+                rotate: 105
+          ring:
+            spread: cx
+            row_overrides:
+              home: 
+                shift: [0, 17]
+                #bind: [0,0,3,1]
+                # bind: [up,right,down,left]
+                bind: [0,0,0,1]
+                column_net: P9
+              top:
+                shift: [0, 17]
+                #bind: [0,3,0,1]
+                # bind: [up,right,down,left]
+                bind: [0,0,0,1]
+                column_net: P8
+          middle: 
+            spread: cx
+            row_overrides:
+              home: 
+                shift: [0, 17]
+                #bind: [0,0,3,0]
+                column_net: P15
+              top:
+                shift: [0, 17]
+                column_net: P14
+                #bind: [0,1,0,1]
+          index: 
+            spread: cx
+            row_overrides:
+              #bottom:
+              #  bind: [34, 19, 0, 0]
+              #  column_net: P8
+              #  tags:
+              #    1u: false
+              #    #2u: true
+              home:
+                shift: [0, 17]
+                #bind: [0,0,3,0]
+                # bind: [up,right,down,left]
+                bind: [0,1,0,0]
+                column_net: P4
+              top: 
+                shift: [0, 17]
+                #bind: [0,1,3,3]
+                # bind: [up,right,down,left]
+                bind: [0,1,0,0]
+                column_net: P5
+          #far: 
+          #  spread: cx
+          #  row_overrides: 
+          #    bottom:
+          #      #bind: [34,1, 0, 0]
+          #      column_net: P9
+    thumbfan:
+      anchor:
+        ref: board_index_home
+        shift: [5, -17]
+      rows:
+        home:
+      columns:
+        home:
+          spread: cx
+          rows:
+            home:
+              # bind: [left,up,right,down]
+              bind: [25,5,0,5]
+              column_net: P0
+              tags:
+                15u: true
+              rotate: 75
+        far:
+          spread: cx-1.6
+          stagger: -4.394
+          rows:
+            home:
+              # bind: [left,up,right,down]
+              bind: [0,5,0,5]
+              column_net: P1
+              tags:
+                15u: true
+              rotate: 75
+outlines:
+  exports:
+    raw: 
+      - type: keys
+        side: left
+        size: [1cx , 1cx]
+      - type: rectangle
+        size: [94, 43]
+        anchor:
+          ref: board_index_home
+          rotate: -15
+          shift: [-49.5, -27]
+    cutout:
+      - type: outline
+        name: raw
+        fillet: 3
+    keycap_outlines:
+      - type: keys
+        side: left
+        size: [1cx - 0.5, 1cy - 0.5] # Choc keycaps are 17.5 x 16.5
+        bound: false
+    keycap_outlines15:
+      - type: keys
+        side: left
+        size: [1.5cx - 0.5, 1cy - 0.5] # Choc keycaps are 17.5 x 16.5
+        bound: false    
+        tags: [15u]
+    keycap_outlines2:
+      - type: keys
+        side: left
+        size: [2cx - 0.5, 1cy - 0.5] # Choc keycaps are 17.5 x 16.5
+        bound: false    
+        tags: [2u]       
+    preview:
+        [keycap_outlines,keycap_outlines15,keycap_outlines2]
+pcbs:
+  kardV2:
+    outlines:
+      board:
+        outline: cutout
+      keycaps:
+        outline: preview
+        layer: Eco1.User
+    footprints:
+      promicro:
+        type: promicro_pretty
+        anchor:
+          ref: board_ring_home
+          shift: [15, -24]
+          rotate: 165
+      pcm12:
+        type: pcm12
+        anchor:
+          ref: thumbfan_far_home
+          shift: [-25, 8.3]
+          rotate: -90
+        nets:
+          from: pos  
+          to: RAW
+        params:
+          reverse: true 
+      via3:
+        type: via
+        anchor: 
+          ref: thumbfan_home_home
+          shift: [-3,12]
+        nets: 
+          net: RAW 
+      via4:
+        type: via
+        anchor: 
+          ref: thumbfan_home_home
+          shift: [-9,10]
+        nets: 
+          net: pos 
+      via5:
+        type: via
+        anchor: 
+          ref: thumbfan_home_home
+          shift: [-7,23]
+        nets: 
+          net: GND 
+      via6:
+        type: via
+        anchor: 
+          ref: thumbfan_home_home
+          shift: [-12,20.75]
+        nets: 
+          net: RST 
+      b3u1000p:
+        type: b3u1000p
+        nets:
+          r1: RST  
+          r2: GND
+        anchor:
+          ref: thumbfan_home_home
+          shift: [-25.5, 20]
+          rotate: 270
+        params:
+          reverse: true 
+      bat:
+        type: bat
+        nets: 
+          neg: GND
+        anchor:
+          ref: board_ring_home
+          shift: [0 , -11]
+          rotate: 75
