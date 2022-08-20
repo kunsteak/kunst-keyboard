@@ -1,7 +1,7 @@
 # The Kunst Keyboard
 A custom 18-key keyboard:
 
-![](kunst/thekunst-keyboard.png)
+![](kunst/the_kunst_keyboard.png)
 
 Kunst Keymap:
 
