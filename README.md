@@ -1,5 +1,5 @@
 # The Kunst Keyboard
-Design by Ben Vallack | [ZMK shield](https://github.com/kunsteak/zmk-config-kunst)
+Design idea inspired by Ben Vallack | [ZMK shield](https://github.com/kunsteak/zmk-config-kunst)
 
 A custom 18-key keyboard:
 
